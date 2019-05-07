@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'animals',
+    'common',
 
 
     'django.contrib.admin',
