@@ -28,7 +28,7 @@ class AnimalList(generic.ListView):
 class UserAnimalsList(LoginRequiredMixin, generic.ListView):
     model = Animal
     template_name = 'animals_list.html'
-    context_object_name = 'animal'
+    context_object_name = 'animal' # за тъмплейта
 
     def get_queryset(self):
         user_id = int(self.request.user.id)
@@ -47,38 +47,38 @@ class AnimalDetail(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'animal'
     template_name = 'animal_detail.html'
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super(AnimalDetail, self).get_context_data(**kwargs)
-    #     # context['reviews'] = Review.objects.all().filter(furniture=self.get_object())
-    #     # context['form'] = ReviewForm()
-    #     # context['form'].fields['author'].initial = self.request.user.id
-    #     print(context)
-    #     owner = context['object'].user
-    #     current_user = self.request.user
-    #     if has_access_to_modify(current_user, owner):
-    #         context['is_user_furniture'] = True
-    #         return context
-    #     context['is_user_furniture'] = False
-    #     return context
-    #
-    # def post(self,request, pk):
-    #     url = f'/furniture/details/{self.get_object().id}/'
-    #     post_values = request.POST.copy()
-    #     form = ReviewForm(post_values)
-    #
-    #     if form.is_valid():
-    #         author = ProfileUser.objects.all().filter(user__pk=request.user.id)[0]
-    #         post_values['furniture'] = self.get_object()
-    #         review = Review(
-    #             content = post_values['content'],
-    #             score = post_values['score'],
-    #             furniture=self.get_object(),
-    #             author=author
-    #         )
-    #         review.save()
-    #         return HttpResponseRedirect(url)
-    #     else:
-    #         raise Exception(form.errors)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(AnimalDetail, self).get_context_data(**kwargs)
+        # context['reviews'] = Review.objects.all().filter(furniture=self.get_object())
+        # context['form'] = ReviewForm()
+        # context['form'].fields['author'].initial = self.request.user.id
+        print(context)
+        owner = context['object'].user
+        current_user = self.request.user
+        if has_access_to_modify(current_user, owner):
+            context['is_user_furniture'] = True
+            return context
+        context['is_user_furniture'] = False
+        return context
+
+    def post(self,request, pk):
+        url = f'/furniture/details/{self.get_object().id}/'
+        post_values = request.POST.copy()
+        form = ReviewForm(post_values)
+
+        if form.is_valid():
+            author = ProfileUser.objects.all().filter(user__pk=request.user.id)[0]
+            post_values['furniture'] = self.get_object()
+            review = Review(
+                content = post_values['content'],
+                score = post_values['score'],
+                furniture=self.get_object(),
+                author=author
+            )
+            review.save()
+            return HttpResponseRedirect(url)
+        else:
+            raise Exception(form.errors)
 
 
 class AnimalDelete(LoginRequiredMixin, generic.DeleteView):

@@ -4,19 +4,20 @@
 {% block 'body' %}
      <div class="row">
             <div class="col-lg-6">
-            <img src="{{furniture.image_url}}" style="width: 100%" alt="">
+            <img src="{{animal.image_url}}" style="width: 100%" alt="">
         </div>
         <div class="col-lg-6">
-            <h3>Model: {{furniture.model}}</h3>
-            <h3>Make: {{furniture.make}}</h3>
-            {% if furniture.material %}
-            <h3>Material: {{furniture.material}}</h3>
+            <h3>Model: {{animal.model}}</h3>
+            <h3>Make: {{animal.make}}</h3>
+            <h3>Make: {{animal.location}}</h3>
+            {% if animal.species %}
+            <h3>Material: {{animal.species}}</h3>
             {% endif %}
-            <h3>Price: {{furniture.price}}</h3>
-            <p>Description: {{furniture.description}}</p>
+            <h3>Price: </h3>
+            <p>Description: {{animal.description}}</p>
             {% if  is_user_furniture %}
-            <a href="{% url 'furniture-edit' furniture.id %}" class="btn btn-success">Edit</a>
-            <a href="{% url 'furniture-delete' furniture.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'animal-edit' animal %}" class="btn btn-success">Edit</a>
+            <a href="{% url 'animal-delete' animal %}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>
     </div>
