@@ -25,4 +25,4 @@ class Animal(models.Model):
     species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return f"{self.user.id}"
+        return f"{self.id}"

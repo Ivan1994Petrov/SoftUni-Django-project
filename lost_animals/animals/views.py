@@ -62,23 +62,25 @@ class AnimalDetail(LoginRequiredMixin, generic.DetailView):
         return context
 
     def post(self,request, pk):
-        url = f'/furniture/details/{self.get_object().id}/'
+        url = f'/animal/details/{self.get_object().id}/'
         post_values = request.POST.copy()
-        form = ReviewForm(post_values)
+        post_values['animal'] = self.get_object()
+        return HttpResponseRedirect(url)
+        #form = ReviewForm(post_values)
 
-        if form.is_valid():
-            author = ProfileUser.objects.all().filter(user__pk=request.user.id)[0]
-            post_values['furniture'] = self.get_object()
-            review = Review(
-                content = post_values['content'],
-                score = post_values['score'],
-                furniture=self.get_object(),
-                author=author
-            )
-            review.save()
-            return HttpResponseRedirect(url)
-        else:
-            raise Exception(form.errors)
+        # if form.is_valid():
+        #     author = ProfileUser.objects.all().filter(user__pk=request.user.id)[0]
+        #     post_values['furniture'] = self.get_object()
+        #     review = Review(
+        #         content = post_values['content'],
+        #         score = post_values['score'],
+        #         furniture=self.get_object(),
+        #         author=author
+        #     )
+        #     review.save()
+        #     return HttpResponseRedirect(url)
+        # else:
+        #     raise Exception(form.errors)
 
 
 class AnimalDelete(LoginRequiredMixin, generic.DeleteView):
@@ -111,23 +113,28 @@ class AnimalCreate(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class AnimalsEdit(LoginRequiredMixin, generic.UpdateView):
+class AnimalsEdit(generic.edit.UpdateView):
     model = Animal
     form_class = CreateAnimalForm
     template_name = 'animal_create.html'
     success_url = '/animals/'
 
-    def form_valid(self, form):
-        user = ProfileUser.objects.all().filter(user__pk=self.request.user.id)[0]
-        form.instance.user = user
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     user = ProfileUser.objects.all().filter(user__pk=self.request.user.id)[0]
+    #     form.instance.user = user
+    #     return super().form_valid(form)
 
-    def get(self, request, pk):
-        # if not has_access_to_modify(self.request.user, self.get_object()):
-        #     return render(request, 'permission_denied.html')
-        instance = Animal.objects.get(pk=pk)
-        form = CreateAnimalForm(request.POST or None, instance=instance)
-        return render(request, 'animal_create.html', {'form': form})
+    # def get_object(self, queryset=None):
+    #     instance = Animal.objects.get(pk=self.us)
+    #
+    #
+    # def get(self, request, pk):
+    #     # if not has_access_to_modify(self.request.user, self.get_object()):
+    #     #     return render(request, 'permission_denied.html')
+    #     # instance = Animal.objects.get(pk=pk)
+    #     instance = Animal.objects.get(pk=pk)
+    #     form = CreateAnimalForm(request.POST or None, instance=instance)
+    #     return render(request, 'animal_create.html', {'form': form})
 
 
 class CreateSpecies(generic.CreateView):
