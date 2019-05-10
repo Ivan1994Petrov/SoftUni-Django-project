@@ -5,9 +5,10 @@
         {% for f in animal %}
          <div class="col-lg-4">
               <div class="card" style="width: 18rem;">
-          <img src="{{f.image_url}}" class="card-img-top" alt="...">
+          <img src="http://127.0.0.1:8000/media/{{f.uploaded_image}}" class="card-img-top" alt="...">
+                 
           <div class="card-body">
-            <h5 class="card-title">{{f.model}}</h5>
+            <h5 class="card-title">{{f.species}}</h5>
             <p class="card-text">{{f.description}}</p>
             <a href="{% url 'animal-detail' f.id %}" class="btn btn-primary">See details</a>
           </div>

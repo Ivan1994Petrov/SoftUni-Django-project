@@ -21,8 +21,9 @@ class Animal(models.Model):
                                  message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
-    image_url = models.URLField()
+    # image_url = models.URLField()
     species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True)
+    uploaded_image = models.ImageField(upload_to='media/',null=True, blank=True)
 
     def __str__(self):
         return f"{self.id}"

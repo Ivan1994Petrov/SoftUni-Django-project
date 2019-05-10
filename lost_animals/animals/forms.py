@@ -34,11 +34,11 @@ class CreateAnimalForm(forms.ModelForm):
         }
     ))
 
-    image_url = forms.URLField(required=True, widget=forms.TextInput(
-        attrs={
-            'class': 'form-control'
-        }
-    ))
+    # image_url = forms.URLField(required=True, widget=forms.TextInput(
+    #     attrs={
+    #         'class': 'form-control'
+    #     }
+    # ))
     species = forms.ModelChoiceField(queryset=Species.objects.all(),
                                       widget=forms.Select(
                                           attrs={
@@ -47,6 +47,7 @@ class CreateAnimalForm(forms.ModelForm):
                                       ))
 
 
+
     class Meta:
         model = Animal
-        fields = ('id', 'location', 'phone_number', 'description', 'species', 'image_url')
+        fields = ('id', 'location', 'phone_number', 'description', 'species', 'uploaded_image')
