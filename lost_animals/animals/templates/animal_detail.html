@@ -7,14 +7,14 @@
             <img src="http://127.0.0.1:8000/media/{{animal.uploaded_image}}" style="width: 100%" alt="">
         </div>
         <div class="col-lg-6">
-            <h3>Model: {{animal.model}}</h3>
-            <h3>Make: {{animal.make}}</h3>
-            <h3>Make: {{animal.location}}</h3>
+            <p><strong>User: </strong>{{animal.user}}</p>
+            <p><strong>Phone number: </strong>{{animal.phone_number}}</p>
+            <p><strong>Location: </strong>{{animal.location}}</p>
             {% if animal.species %}
-            <h3>Material: {{animal.species}}</h3>
+            <p><strong>Species: </strong>{{animal.species}}</p>
             {% endif %}
-            <h3>Price: </h3>
-            <p>Description: {{animal.description}}</p>
+            <p><strong>Found or lost: </strong>{{ animal.found_or_lost }}</p>
+            <p><strong>Description: </strong>{{animal.description}}</p>
             {% if  is_user_furniture %}
             <a href="{% url 'animal-edit' animal %}" class="btn btn-success">Edit</a>
             <a href="{% url 'animal-delete' animal %}" class="btn btn-danger">Delete</a>

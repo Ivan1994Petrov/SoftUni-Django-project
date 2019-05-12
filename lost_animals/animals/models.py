@@ -33,9 +33,9 @@ class Animal(models.Model):
     # image_url = models.URLField()
     species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True)
     found_or_lost = models.ForeignKey(FoundOrLost, on_delete=models.CASCADE, blank=True, null=True)
-    uploaded_image = models.ImageField("Качи снимка на животното ",upload_to='media/',null=True, blank=True)
+    uploaded_image = models.ImageField(upload_to='media/',null=True, blank=True)
 
-    date = models.DateField("Дата на обявата ", default=datetime.date.today, blank=True)
+    date = models.DateField(default=datetime.date.today, blank=True)
 
     def __str__(self):
         return f"{self.id}"
