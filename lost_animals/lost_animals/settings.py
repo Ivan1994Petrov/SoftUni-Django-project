@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts',
     'animals',
     'common',
+    'filter',
 
 
     'django.contrib.admin',

@@ -1,0 +1,29 @@
+
+{% extends 'index.html' %}
+
+{% block 'body' %}
+
+    <div class="row">
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+  <div class="row">
+  {% for user in filter.qs %}
+    <div class="col-lg-4">
+              <div class="card" style="width: 18rem;">
+          <img src="http://127.0.0.1:8000/media/{{user.uploaded_image}}" class="card-img-top" alt="...">
+
+          <div class="card-body">
+            <h5 class="card-title">{{user.species}}</h5>
+            <p class="card-text">{{user.location}}</p>
+            <a href="{% url 'animal-detail' user.id %}" class="btn btn-primary">See details</a>
+          </div>
+        </div>
+         </div>
+  {% endfor %}
+
+    </div>
+
+{% endblock %}

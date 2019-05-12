@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxLengthValidator, RegexValidator
 
 from accounts.models import ProfileUser
+
+import datetime
 # Create your models here.
 
 
@@ -10,6 +12,13 @@ class Species(models.Model):
 
     def __str__(self):
         return f"{self.species}"
+
+
+class FoundOrLost(models.Model):
+    found_or_lost = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.found_or_lost}'
 
 
 class Animal(models.Model):
@@ -23,7 +32,10 @@ class Animal(models.Model):
 
     # image_url = models.URLField()
     species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True)
-    uploaded_image = models.ImageField(upload_to='media/',null=True, blank=True)
+    found_or_lost = models.ForeignKey(FoundOrLost, on_delete=models.CASCADE, blank=True, null=True)
+    uploaded_image = models.ImageField("Качи снимка на животното ",upload_to='media/',null=True, blank=True)
+
+    date = models.DateField("Дата на обявата ", default=datetime.date.today, blank=True)
 
     def __str__(self):
         return f"{self.id}"

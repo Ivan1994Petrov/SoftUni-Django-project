@@ -144,4 +144,3 @@ class CreateSpecies(generic.CreateView):
     success_url = '/animals/'
 
 
-
