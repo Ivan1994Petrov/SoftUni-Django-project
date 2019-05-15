@@ -35,7 +35,7 @@
           {% if request.user.is_superuser %}
             <a class="dropdown-item" href="{% url 'species-add' %}">Add species</a>
           {% endif %}
-          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="{% url 'user-profile' user.id %}">Profile</a>
           <a class="dropdown-item" href="{% url 'logout' %}?next=/">Logout</a>
         </div>
       </li>

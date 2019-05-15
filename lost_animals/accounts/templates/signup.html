@@ -16,8 +16,18 @@
               <h2>Sign up</h2>
             {% csrf_token %}
             {{ form }}
+
+
+              {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+                <div class="g-recaptcha" data-sitekey="6Lf_EaMUAAAAADAxx-IhWZ1YsodB7yrDNYkiYNM6" data-callback="recaptchaCallback"></div>
             <button class="btn btn-primary" type="submit">Sign up</button>
              <span>Have an account?<a href="{% url 'login' %}" style="color:orange">Sign in here</a></span>
+
 
           </form>
     </div>

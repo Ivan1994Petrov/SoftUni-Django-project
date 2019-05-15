@@ -7,5 +7,5 @@ from .filters import AnimalFilter
 def search(request):
     animal_list = Animal.objects.all()
     animal_filter = AnimalFilter(request.GET, queryset=animal_list)
-    return render(request, 'animal_list.html', {'filter': animal_filter})
+    return render(request, 'filter.html', {'filter': animal_filter})
 

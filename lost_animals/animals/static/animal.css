@@ -5,7 +5,8 @@
 }
 
 .btn-primary:hover {
-    background-color: royalblue;
+    background-color: royalblue
+;
     color: white;
     border: 1px solid grey;
 }

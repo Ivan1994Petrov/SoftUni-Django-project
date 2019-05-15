@@ -51,7 +51,3 @@ class SignUp(generic.CreateView):
 
 
 
-#
-# def sing_up(request):
-#     form = forms.UserForm()
-#     return render(request, 'signup.html', {'form': form})

@@ -7,8 +7,7 @@ from .models import Animal, Species
 from .forms import CreateAnimalForm, SpeciesForm
 
 from accounts.models import ProfileUser
-# from reviews.models import Review
-# from reviews.forms import ReviewForm
+from django.core.paginator import Paginator
 
 
 def has_access_to_modify(current_user, furniture):
@@ -23,6 +22,7 @@ class AnimalList(generic.ListView):
     model = Animal
     template_name = 'animals_list.html'
     context_object_name = 'animal'
+    paginate_by = 6
 
 
 class UserAnimalsList(LoginRequiredMixin, generic.ListView):

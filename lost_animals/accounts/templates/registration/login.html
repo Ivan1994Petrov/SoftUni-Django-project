@@ -21,7 +21,11 @@
                     <br>
                     <span>Do not have an account?<a href="{% url 'signup' %}" style="color:orange">Sign up here</a></span>
                 </form>
-
+        <br>
+            <p><strong>-- OR --</strong></p>
+            <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+            <p><strong>-- OR --</strong></p>
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
         </div>
     </div>
 </div>

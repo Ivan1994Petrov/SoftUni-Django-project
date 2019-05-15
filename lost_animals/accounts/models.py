@@ -15,6 +15,7 @@ class ProfileUser(models.Model):
     def __str__(self):
         return f'{self.user}'
 
+
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = ProfileUser.objects.create(user=kwargs['instance'])

@@ -4,6 +4,7 @@ from .models import ProfileUser
 from django.core.validators import RegexValidator, URLValidator, MinValueValidator
 from django.contrib.auth.forms import UserCreationForm
 
+
 class UserForm(UserCreationForm):
 
     first_name = forms.CharField(required=True,

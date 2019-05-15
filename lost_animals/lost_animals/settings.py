@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'animals',
     'common',
     'filter',
-
+    'social_django',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'lost_animals.urls'
@@ -70,6 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -107,6 +112,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -129,3 +142,15 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6Lf_EaMUAAAAAKA7TTzC5MWw9r78VUQH4sSVi-9I'
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'search'
+
+SOCIAL_AUTH_GITHUB_KEY = 'c128faa3ab78acc8304e'
+SOCIAL_AUTH_GITHUB_SECRET = '04875a3f140036df0359cfacbe9d8bcd21f09680'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='485704633981-d72mhptb6a7blrfp8drs0n5bn9n7pt6v.apps.googleusercontent.com'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'LBZMZhM6OhcibVLrGnttQAOx' #Paste Secret Key
