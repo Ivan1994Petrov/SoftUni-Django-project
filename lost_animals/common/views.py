@@ -1,7 +1,9 @@
 from django.shortcuts import render
-
+from django.shortcuts import redirect
 # Create your views here.
 
 
 def landing(request):
-    return render(request, 'landing_page.html')
+    respons = redirect('/animals/')
+    return  respons
+    # return render(request, 'animals_list.html')

@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('animals/', include('animals.urls')),
-    path('', include('filter.urls')),
+    path('search/', include('filter.urls')),
+    path('', include('common.urls')),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     #path('', include('animals.urls'))
 ]

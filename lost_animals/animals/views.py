@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Animal, Species
 from .forms import CreateAnimalForm, SpeciesForm
+from filter.filters import AnimalFilter
 
 from accounts.models import ProfileUser
 from django.core.paginator import Paginator
@@ -29,6 +30,9 @@ class UserAnimalsList(LoginRequiredMixin, generic.ListView):
     model = Animal
     template_name = 'animals_list.html'
     context_object_name = 'animal' # за тъмплейта
+
+
+
 
     def get_queryset(self):
         user_id = int(self.request.user.id)

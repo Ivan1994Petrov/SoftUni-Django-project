@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:2%">
-  <a class="navbar-brand" href="{% url 'search' %}">Home</a>
+  <a class="navbar-brand" href="{% url 'search' %}">Search</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -36,7 +36,7 @@
             <a class="dropdown-item" href="{% url 'species-add' %}">Add species</a>
           {% endif %}
           <a class="dropdown-item" href="{% url 'user-profile' user.id %}">Profile</a>
-          <a class="dropdown-item" href="{% url 'logout' %}?next=/">Logout</a>
+          <a class="dropdown-item" href="{% url 'logout' %}?next=/animals/">Logout</a>
         </div>
       </li>
          {% endif %}

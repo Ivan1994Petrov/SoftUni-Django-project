@@ -33,7 +33,7 @@ from .models import ProfileUser
 
 
 def redirect_user(request):
-    url = f'/'
+    url = f'/animals/'
     return HttpResponseRedirect(url)
 
 
@@ -45,7 +45,7 @@ class UserDetail(generic.DetailView):
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
-    success_url = '/'
+    success_url = '/animals/'
     template_name = 'signup.html'
     form = forms.UserForm()
 
