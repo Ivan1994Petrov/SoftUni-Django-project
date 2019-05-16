@@ -1,5 +1,4 @@
 from django import forms
-from django.core.validators import MinValueValidator
 
 from .models import Animal, Species, FoundOrLost
 
@@ -14,17 +13,6 @@ class SpeciesForm(forms.ModelForm):
     class Meta:
         model = Species
         fields = ('species',)
-
-
-# class FoundOrLostForm(forms.ModelForm):
-#     found_or_lost = forms.CharField(required=True, widget=forms.TextInput(
-#         attrs={
-#             'class': 'form-control'
-#         }
-#     ))
-#     class Meta:
-#         model = FoundOrLost
-#         fields = ('found_or_lost',)
 
 
 class CreateAnimalForm(forms.ModelForm):

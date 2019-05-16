@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxLengthValidator, RegexValidator
+from django.core.validators import RegexValidator
 
 from accounts.models import ProfileUser
 
@@ -30,7 +30,6 @@ class Animal(models.Model):
                                  message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
-    # image_url = models.URLField()
     species = models.ForeignKey(Species, on_delete=models.CASCADE, blank=True)
     found_or_lost = models.ForeignKey(FoundOrLost, on_delete=models.CASCADE, blank=True, null=True)
     uploaded_image = models.ImageField(upload_to='media/',null=True, blank=True)

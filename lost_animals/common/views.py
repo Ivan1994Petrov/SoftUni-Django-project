@@ -6,4 +6,3 @@ from django.shortcuts import redirect
 def landing(request):
     respons = redirect('/animals/')
     return  respons
-    # return render(request, 'animals_list.html')
