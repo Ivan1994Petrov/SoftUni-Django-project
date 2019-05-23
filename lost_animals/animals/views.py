@@ -14,10 +14,7 @@ def has_access_to_modify(current_user, animal):
     if current_user.is_superuser:
         return True
     elif current_user.id == animal.user.id:
-
         return True
-    print(current_user.id)
-    print(animal.id)
     return False
 
 
@@ -32,8 +29,6 @@ class UserAnimalsList(LoginRequiredMixin, generic.ListView):
     model = Animal
     template_name = 'animals_list.html'
     context_object_name = 'animal'
-
-
 
 
     def get_queryset(self):
@@ -75,18 +70,17 @@ class AnimalDelete(LoginRequiredMixin, generic.DeleteView):
     login_url = 'accounts/login/'
     context_object_name = 'animal'
 
-    # def get(self, request, pk):
-    #     print(has_access_to_modify(self.request.user, self.get_object()))
-    #     if has_access_to_modify(self.request.user, self.get_object()):
-    #         return render(request, 'permission_denied.html')
-    #     return render(request, 'animal_delete.html', {'animal': self.get_object()})
-    #
-    # def post(self, request, pk):
-    #     if has_access_to_modify(self.request.user, self.get_object()):
-    #         return render(request, 'permission_denied.html')
-    #     animal = self.get_object()
-    #     animal.delete()
-    #     return HttpResponseRedirect('/animals/')
+    def get(self, request, pk):
+        if not has_access_to_modify(self.request.user, self.get_object()):
+            return render(request, 'permission_denied.html')
+        return render(request, 'animal_delete.html', {'animal': self.get_object()})
+
+    def post(self, request, pk):
+        if not has_access_to_modify(self.request.user, self.get_object()):
+            return render(request, 'permission_denied.html')
+        animal = self.get_object()
+        animal.delete()
+        return HttpResponseRedirect('/animals/')
 
 
 class AnimalCreate(LoginRequiredMixin, generic.CreateView):
@@ -107,22 +101,21 @@ class AnimalsEdit(generic.edit.UpdateView):
     template_name = 'animal_create.html'
     success_url = '/animals/'
 
-    # def form_valid(self, form):
-    #     user = ProfileUser.objects.all().filter(user__pk=self.request.user.id)[0]
-    #     form.instance.user = user
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        user = ProfileUser.objects.all().filter(user__pk=self.request.user.id)[0]
+        form.instance.user = user
+        return super().form_valid(form)
 
     # def get_object(self, queryset=None):
     #     instance = Animal.objects.get(pk=self.us)
-    #
-    #
-    # def get(self, request, pk):
-    #     # if not has_access_to_modify(self.request.user, self.get_object()):
-    #     #     return render(request, 'permission_denied.html')
-    #     # instance = Animal.objects.get(pk=pk)
-    #     instance = Animal.objects.get(pk=pk)
-    #     form = CreateAnimalForm(request.POST or None, instance=instance)
-    #     return render(request, 'animal_create.html', {'form': form})
+
+    def get(self, request, pk):
+        if not has_access_to_modify(self.request.user, self.get_object()):
+            return render(request, 'permission_denied.html')
+        instance = Animal.objects.get(pk=pk)
+        instance = Animal.objects.get(pk=pk)
+        form = CreateAnimalForm(request.POST or None, instance=instance)
+        return render(request, 'animal_create.html', {'form': form})
 
 
 class CreateSpecies(generic.CreateView):

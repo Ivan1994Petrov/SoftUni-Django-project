@@ -26,6 +26,7 @@ urlpatterns = [
     path('search/', include('filter.urls')),
     path('', include('common.urls')),
     url(r'^auth/', include('social_django.urls', namespace='social')),
+
     #path('', include('animals.urls'))
 ]
 
