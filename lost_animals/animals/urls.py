@@ -2,7 +2,6 @@ from django.urls import path, re_path
 
 from . import views
 
-# from reviews import views as review_views
 
 urlpatterns = [
     path('', views.AnimalList.as_view(), name='animal'),
